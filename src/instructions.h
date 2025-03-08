@@ -21,8 +21,8 @@ private:
 
 	void JMP(u16 NNN);			// 1NNN
 	void CALLNNN(u16 NNN);		// 2NNN
-	void SEVXNN(u8 NN);			// 3XNN
-	void SNEVXNN(u8 NN);		// 4XNN
+	void SEVXNN(u8 VX, u8 NN);	// 3XNN
+	void SNEVXNN(u8 VX, u8 NN);	// 4XNN
 	void SEVXVY(u8 VX, u8 VY);	// 5XY0
 	void LDVXNN(u8 VX, u8 NN);	// 6XNN
 	void ADDVXNN(u8 VX, u8 NN); // 7XNN
