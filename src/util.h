@@ -14,6 +14,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef u8 b8;
 
+
 // Font Data
 extern u8 fontData[80];
 
