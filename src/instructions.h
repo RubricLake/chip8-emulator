@@ -3,16 +3,19 @@
 #define INSTRUCTIONS_H
 
 #include "util.h"
+#include "context.h"
 
 // General Function Pointer
 typedef void (*OpcodeFunc)();
-
 class Instructions {
 public:
 	// Given an opcode, determine which operation to execute.
+	Instructions(Chip8Context* ctx);
 	void execute(u16 opcode);
 
 private:
+	Chip8Context* c;
+
 	void CLS(); // 00E0
 	void RET(); // 00EE
 
