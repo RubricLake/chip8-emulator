@@ -2,6 +2,8 @@
 #ifndef CONTEXT_H
 #define CONTEXT_H
 
+#include <iostream>
+#include <cstring>
 #include "util.h"
 
 class Chip8Context {
@@ -38,8 +40,10 @@ public:
 	// Loads font data, and zeros out others.
 	Chip8Context();
 
-private:
+	// Given an array of data
 	void loadRAM(u8* data, size_t dataSize, size_t startAddress);
+
+	void loadRAM(u16* data, size_t dataSize, size_t startAddress);
 };
 #endif
 

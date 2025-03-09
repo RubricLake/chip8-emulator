@@ -2,6 +2,7 @@
 #ifndef INSTRUCTIONS_H
 #define INSTRUCTIONS_H
 
+#include <cstring>
 #include "util.h"
 #include "context.h"
 
