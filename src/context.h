@@ -20,7 +20,7 @@ public:
 
 	// The Screen to be drawn to
 	// Pixels are on or off
-	b8 frameBuffer[64 * 32];
+	b8 frameBuffer[CHIP8_HEIGHT * CHIP8_HEIGHT];
 
 	// Stores if a key is being pressed
 	// 1, 2, 3, 4
@@ -42,8 +42,6 @@ public:
 
 	// Given an array of data
 	void loadRAM(u8* data, size_t dataSize, size_t startAddress);
-
-	void loadRAM(u16* data, size_t dataSize, size_t startAddress);
 };
 #endif
 
