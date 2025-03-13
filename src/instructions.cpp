@@ -140,7 +140,9 @@ void Instructions::RNDVXNN(u8 VX, u8 NN) {
 }			
 
 // DXYN (draw xor)
-void Instructions::DRWVXVYN(u8 VX, u8 VY, u8 N){}	
+void Instructions::DRWVXVYN(u8 VX, u8 VY, u8 N) {
+	
+}	
 
 // EX9E
 void Instructions::SKPVX(u8 VX) {

@@ -7,7 +7,8 @@
 #include <string>
 #include "util.h"
 
-using std::ifstream, std::string;
+using std::ifstream;
+using std::string;
 
 class Interpreter {
 public:
