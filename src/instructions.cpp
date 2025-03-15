@@ -1,3 +1,4 @@
+#include <SDL3/SDL.h>
 #include "instructions.h"
 
 Instructions::Instructions(Chip8Context* c) : c(c) {}
@@ -141,7 +142,20 @@ void Instructions::RNDVXNN(u8 VX, u8 NN) {
 
 // DXYN (draw xor)
 void Instructions::DRWVXVYN(u8 VX, u8 VY, u8 N) {
-	
+	c->REG[0xf] = 0;
+	for (int i = 0; i < N; i++) {
+		u8 byte = c->RAM[c->I + i];
+		for (int j = 0; j < 8; j++) {
+			int x = (VX + j) % CHIP8_WIDTH;
+			int y = (VY + i) % CHIP8_HEIGHT;
+
+			int index = x + (y * CHIP8_WIDTH);
+			int before = c->frameBuffer[index];
+			c->frameBuffer[index] = c->frameBuffer[index] ^ NthBit(byte, 7-j);
+			if (before == 1 && c->frameBuffer[index] == 0)
+				c->REG[0xf] = 1;
+		}
+	}
 }	
 
 // EX9E

@@ -18,4 +18,13 @@ const int CHIP8_WINDOW_SCALE = 10;
 // Returns amount of bytes in n kilobytes
 constexpr int kilobytes(int n) { return n * 1024; }
 
+// Returns the Most Significant Bit (Left-Most)
+static b8 MSB(u8 byte) { return b8(byte & 128); }
+
+// Returns the Least Significant Bit (Right-Most)
+static b8 LSB(u8 byte) { return b8(byte & 1); }
+
+// Returns the Nth bit.
+// The 0th Bit is the least signfiicant.
+static b8 NthBit(u8 byte, int n) { return b8((byte >> n) & 1); }
 #endif
