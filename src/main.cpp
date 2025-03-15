@@ -44,6 +44,7 @@ static int init(SDL_Window*& window, SDL_Renderer*& renderer) {
 }
 
 int main(int argc, char* argv[]) {
+	// CHIP8 INIT
 	Chip8Context* ctx = new Chip8Context();
 	Instructions ins(ctx);
 	Interpreter ROM("test_opcode.ch8");

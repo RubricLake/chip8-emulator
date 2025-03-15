@@ -26,6 +26,8 @@ void Interpreter::readROM(string filename) {
 	if (!inFile)
 		throw std::runtime_error("INTERPRETER: COULD NOT OPEN SPECIFIED FILE " + filename);
 
+	memset(opCodes, 0, sizeof(opCodes));
+
 	int i = 0;
 	while (inFile.peek() != EOF) {
 		if (i >= 0xE00)
