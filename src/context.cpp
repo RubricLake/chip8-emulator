@@ -18,3 +18,16 @@ void Chip8Context::loadRAM(u8* data, size_t dataSize, size_t startAddress) {
 	else
 		std::cout << "MEMORY OUT OF BOUNDS" << std::endl;
 }
+
+// index = col + (row * totalColumns)
+void Chip8Context::drawBuffer(SDL_Renderer* renderer) const {
+
+	for (int row = 0; row < CHIP8_HEIGHT; row++) {
+		for (int col = 0; col < CHIP8_WIDTH; col++) {
+			u8 color = (frameBuffer[col + (row * CHIP8_WIDTH)] == 0) ? 0 : 0xff;
+			SDL_SetRenderDrawColor(renderer, color, color, color, 0xff);
+			SDL_FRect pixel = { col, row, 1.0f, 1.0f };
+			SDL_RenderFillRect(renderer, &pixel);
+		}
+	}
+}

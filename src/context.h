@@ -4,12 +4,13 @@
 
 #include <iostream>
 #include <cstring>
+#include <SDL3/SDL.h>
 #include "util.h"
 
 class Chip8Context {
 public:
-	// 0x000 - 0x200 are for the system
-	// 0x200 - 0xFFF are for user programs (put code from ROMs here)
+	// [0x000 - 0x200) are for the system
+	// [0x200 - 0xFFF) are for user programs (put code from ROMs here)
 	u8 RAM[kilobytes(4)];
 
 	// General Purpose Registers
@@ -20,7 +21,7 @@ public:
 
 	// The Screen to be drawn to
 	// Pixels are on or off
-	b8 frameBuffer[CHIP8_HEIGHT * CHIP8_HEIGHT];
+	b8 frameBuffer[CHIP8_HEIGHT * CHIP8_WIDTH];
 
 	// Stores if a key is being pressed
 	// 1, 2, 3, 4
@@ -42,6 +43,10 @@ public:
 
 	// Given an array of data
 	void loadRAM(u8* data, size_t dataSize, size_t startAddress);
+
+	// Draw the frame buffer to the screen
+	void drawBuffer(SDL_Renderer* renderer) const;
+
 };
 #endif
 

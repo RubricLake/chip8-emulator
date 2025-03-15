@@ -56,9 +56,6 @@ int main(int argc, char* argv[]) {
 	if (code < 0)
 		return code;
 	
-	// Scale Window
-	
-
 	// Main Loop
 	SDL_Event event;
 	int quit = 0;
@@ -76,12 +73,9 @@ int main(int argc, char* argv[]) {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xff);
 		SDL_RenderClear(renderer);
 
-		// Draw white pixel to center of screen
-		SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
-		SDL_FRect pixel = { CHIP8_WIDTH * 0.5f, CHIP8_HEIGHT * 0.5f, 1.0f, 1.0f };
-		SDL_RenderFillRect(renderer, &pixel);
+		// Draw Frame Buffer
+		ctx->drawBuffer(renderer);
 		SDL_RenderPresent(renderer);
-
 
 		SDL_Delay(1);
 	}
