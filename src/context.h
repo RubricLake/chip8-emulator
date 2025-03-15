@@ -30,6 +30,26 @@ public:
 	// Z, X, C, V
 	b8 keyboard[16];
 
+	// SDL Key Lookup Table
+	const SDL_Keycode keyLookup[16] = {
+			SDLK_1, // 0
+			SDLK_2, // 1
+			SDLK_3, // 2
+			SDLK_4, // 3
+			SDLK_Q, // 4
+			SDLK_W, // 5
+			SDLK_E, // 6
+			SDLK_R, // 7
+			SDLK_A, // 8
+			SDLK_S, // 9
+			SDLK_D, // 10
+			SDLK_F, // 11
+			SDLK_Z, // 12
+			SDLK_C, // 13
+			SDLK_X, // 14
+			SDLK_V  // 15
+	};
+
 	// Special Purpose Reigsters
 	u8 DT;  // Delay Timer
 	u8 ST;  // Sound Timer

@@ -177,7 +177,19 @@ void Instructions::LDVXDT(u8 VX) {
 
 // FX0A (wait for input)
 void Instructions::LDVXK(u8 VX) {
-	
+	SDL_Event event;
+	while (true) {
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_EVENT_KEY_DOWN) {
+				for (int i = 0; i < 16; i++) {
+					if (c->keyLookup[i] == event.key.key) {
+						c->REG[VX] = i;
+						return;
+					}
+				}
+			}
+		}
+	}
 }	
 
 // FX15

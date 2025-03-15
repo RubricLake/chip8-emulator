@@ -3,6 +3,7 @@
 #define INSTRUCTIONS_H
 
 #include <cstring>
+#include <SDL3/SDL.h>
 #include "util.h"
 #include "context.h"
 
