@@ -69,6 +69,9 @@ int main(int argc, char* argv[]) {
 				break;
 			}
 		}
+		
+		// Execute Instruction 
+		ins.execute();
 
 		// Black Background
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xff);

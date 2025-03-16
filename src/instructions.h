@@ -11,9 +11,12 @@
 typedef void (*OpcodeFunc)();
 class Instructions {
 public:
-	// Given an opcode, determine which operation to execute.
+	// Constructor binds a context to a set of instructions.
 	Instructions(Chip8Context* ctx);
-	void execute(u16 opcode);
+
+	// Execute the given instruction at PC.
+	// Increments PC.
+	void execute();
 
 private:
 	Chip8Context* c;

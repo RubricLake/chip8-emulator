@@ -226,8 +226,9 @@ void Instructions::LDVXI(u8 VX) {
 	
 }	
 
-void Instructions::execute(u16 opcode) {
-	
+void Instructions::execute() {
+	u16 opcode = static_cast<u16>(c->RAM[c->PC]) << 8 | c->RAM[c->PC + 1];
+
 	switch (opcode >> 12) {
 	case 0:
 		if (opcode == 0x00E0)
@@ -274,6 +275,10 @@ void Instructions::execute(u16 opcode) {
 		DRWVXVYN((opcode >> 8) ^ 0xD0, (opcode & 0xff) >> 4, opcode & 0xf);
 		break;
 	case 0xE:
+		if ((opcode & 0xff) == 0x9E)
+			SKPVX((opcode >> 8) & 0xf);
+		else if ((opcode & 0xff) == 0xA1)
+			SKNPVX((opcode >> 8) & 0xf);
 		break;
 	case 0xF:
 		break;
@@ -281,4 +286,6 @@ void Instructions::execute(u16 opcode) {
 	default:
 		break;
 	}
+
+	c->PC += 2;
 }
