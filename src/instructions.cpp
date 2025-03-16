@@ -3,9 +3,6 @@
 
 Instructions::Instructions(Chip8Context* c) : c(c) {}
 
-
-void Instructions::execute(u16 opcode) {}
-
 // 00E0
 void Instructions::CLS() { 
 	memset(c->frameBuffer, 0, sizeof(c->frameBuffer));
@@ -146,8 +143,8 @@ void Instructions::DRWVXVYN(u8 VX, u8 VY, u8 N) {
 	for (int i = 0; i < N; i++) {
 		u8 byte = c->RAM[c->I + i];
 		for (int j = 0; j < 8; j++) {
-			int x = (VX + j) % CHIP8_WIDTH;
-			int y = (VY + i) % CHIP8_HEIGHT;
+			int x = (c->REG[VX] + j) % CHIP8_WIDTH;
+			int y = (c->REG[VY] + i) % CHIP8_HEIGHT;
 
 			int index = x + (y * CHIP8_WIDTH);
 			int before = c->frameBuffer[index];
@@ -228,3 +225,60 @@ void Instructions::LDVXI(u8 VX) {
 		c->REG[i] = c->RAM[c->I + i];
 	
 }	
+
+void Instructions::execute(u16 opcode) {
+	
+	switch (opcode >> 12) {
+	case 0:
+		if (opcode == 0x00E0)
+			CLS();
+		else if (opcode == 0x00EE)
+			RET();
+		break;
+	case 1:
+		JMP(opcode ^ 0x1000);
+		break;
+	case 2:
+		CALLNNN(opcode ^ 0x2000);
+		break;
+	case 3:
+		SEVXNN((opcode >> 8) ^ 0x30, opcode & 0xff);
+		break;
+	case 4:
+		SNEVXNN((opcode >> 8) ^ 0x40, opcode & 0xff);
+		break;
+	case 5:
+		SEVXVY((opcode >> 8) ^ 0x50, (opcode & 0xff) >> 4);
+		break;
+	case 6:
+		LDVXNN((opcode >> 8) ^ 0x60, opcode & 0xff);
+		break;
+	case 7:
+		ADDVXNN((opcode >> 8) ^ 0x70, opcode & 0xff);
+		break;
+	case 8:
+		break;
+	case 9:
+		SNEVXVY((opcode >> 8) ^ 0x90, (opcode & 0xff) >> 4);
+		break;
+	case 0xA:
+		LDINNN(opcode ^ 0xA000);
+		break;
+	case 0xB:
+		JMPV0NNN(opcode ^ 0xB000);
+		break;
+	case 0xC:
+		RNDVXNN((opcode >> 8) ^ 0xC0, opcode & 0xff);
+		break;
+	case 0xD:
+		DRWVXVYN((opcode >> 8) ^ 0xD0, (opcode & 0xff) >> 4, opcode & 0xf);
+		break;
+	case 0xE:
+		break;
+	case 0xF:
+		break;
+
+	default:
+		break;
+	}
+}

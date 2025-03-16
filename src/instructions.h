@@ -42,7 +42,7 @@ private:
 	
 	void LDINNN(u8 NNN);			   // ANNN
 	void JMPV0NNN(u8 NNN);			   // BNNN
-	void RNDVXNN(u8 VX, u8 NNN);	   // CXNN
+	void RNDVXNN(u8 VX, u8 NN);		   // CXNN
 	void DRWVXVYN(u8 VX, u8 VY, u8 N); // DXYN
 
 	void SKPVX(u8 VX);  // EX9E
