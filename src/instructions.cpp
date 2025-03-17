@@ -300,28 +300,39 @@ void Instructions::execute() {
 		else if ((opcode & 0xff) == 0xA1)
 			SKNPVX((opcode >> 8) & 0xf);
 		break;
-	case 0xF:
+	case 0xF: {
+		u8 VX = (opcode >> 8) & 0x0F;
 		switch (opcode & 0x00FF) {
 		case 0x07:
+			LDVXDT(VX);
 			break;
 		case 0x0A:
+			LDVXK(VX);
 			break;
 		case 0x15:
+			LDDTVX(VX);
 			break;
 		case 0x18:
+			LDSTVX(VX);
 			break;
 		case 0x1E:
+			ADDIVX(VX);
 			break;
 		case 0x29:
+			LDFVX(VX);
 			break;
 		case 0x33:
+			LDBVX(VX);
 			break;
 		case 0x55:
+			LDIVX(VX);
 			break;
 		case 0x65:
+			LDVXI(VX);
 			break;
 		}
 		break;
+	}
 
 	default:
 		break;
