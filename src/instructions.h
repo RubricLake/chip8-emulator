@@ -38,9 +38,9 @@ private:
 	void XORVXVY(u8 VX, u8 VY);  // 8XY3
 	void ADDVXVY(u8 VX, u8 VY);  // 8XY4
 	void SUBVXVY(u8 VX, u8 VY);  // 8XY5
-	void SHRVXVY(u8 VX);		 // 8XY6
+	void SHRVXVY(u8 VX, u8 VY);	 // 8XY6
 	void SUBNVXVY(u8 VX, u8 VY); // 8XY7
-	void SHLVXVY(u8 VX);		 // 8XYE
+	void SHLVXVY(u8 VX, u8 VY);	 // 8XYE
 	void SNEVXVY(u8 VX, u8 VY);	 // 9XY0
 	
 	void LDINNN(u8 NNN);			   // ANNN

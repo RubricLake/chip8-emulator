@@ -1,6 +1,6 @@
 #include "context.h"
 
-Chip8Context::Chip8Context() : DT(0), ST(0), I(0), PC(0), SP(0) {
+Chip8Context::Chip8Context() : DT(0), ST(0), I(0), PC(0x200), SP(0) {
 	memset(RAM, 0, sizeof(RAM));
 	memset(REG, 0, sizeof(REG));
 	memset(stack, 0, sizeof(stack));

@@ -95,9 +95,9 @@ void Instructions::SUBVXVY(u8 VX, u8 VY) {
 }  
 
 // 8XY6
-void Instructions::SHRVXVY(u8 VX) {
-	c->REG[0xF] = c->REG[VX] & 0x01;
-	c->REG[VX] /= 2;
+void Instructions::SHRVXVY(u8 VX, u8 VY) {
+	c->REG[VX] = (c->REG[VY] >> 1);
+	c->REG[0xF] = NthBit(c->REG[VY], 0);
 }			
 
 // 8XY7
@@ -111,9 +111,9 @@ void Instructions::SUBNVXVY(u8 VX, u8 VY) {
 } 
 
 // 8XYE
-void Instructions::SHLVXVY(u8 VX) {
-	c->REG[0xF] = (c->REG[VX] & 0x80) >> 7;
-	c->REG[VX] = c->REG[VX] << 1;
+void Instructions::SHLVXVY(u8 VX, u8 VY) {
+	c->REG[VX] = (c->REG[VY] << 1);
+	c->REG[0xF] = NthBit(c->REG[VY], 7);
 }			
 
 // 9XY0
@@ -258,27 +258,40 @@ void Instructions::execute() {
 		ADDVXNN((opcode >> 8) ^ 0x70, opcode & 0xff);
 		break;
 	case 8:
+	{
+		u8 VX = (opcode >> 8) & 0x0F;
+		u8 VY = (opcode >> 4) & 0x00F;
 		switch (opcode & 0x000F) {
 		case 0x0:
+			LDVXVY(VX, VY);
 			break;
 		case 0x1:
+			ORVXVY(VX, VY);
 			break;
 		case 0x2:
+			ANDVXVY(VX, VY);
 			break;
 		case 0x3:
+			XORVXVY(VX, VY);
 			break;
 		case 0x4:
+			ADDVXVY(VX, VY);
 			break;
 		case 0x5:
+			SUBVXVY(VX, VY);
 			break;
 		case 0x6:
+			SHRVXVY(VX, VY);
 			break;
 		case 0x7:
+			SUBNVXVY(VX, VY);
 			break;
 		case 0xE:
+			SHLVXVY(VX, VY);
 			break;
 		}
 		break;
+	}
 	case 9:
 		SNEVXVY((opcode >> 8) ^ 0x90, (opcode & 0xff) >> 4);
 		break;
@@ -300,7 +313,8 @@ void Instructions::execute() {
 		else if ((opcode & 0xff) == 0xA1)
 			SKNPVX((opcode >> 8) & 0xf);
 		break;
-	case 0xF: {
+	case 0xF: 
+	{
 		u8 VX = (opcode >> 8) & 0x0F;
 		switch (opcode & 0x00FF) {
 		case 0x07:
