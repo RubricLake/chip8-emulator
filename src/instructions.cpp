@@ -258,6 +258,26 @@ void Instructions::execute() {
 		ADDVXNN((opcode >> 8) ^ 0x70, opcode & 0xff);
 		break;
 	case 8:
+		switch (opcode & 0x000F) {
+		case 0x0:
+			break;
+		case 0x1:
+			break;
+		case 0x2:
+			break;
+		case 0x3:
+			break;
+		case 0x4:
+			break;
+		case 0x5:
+			break;
+		case 0x6:
+			break;
+		case 0x7:
+			break;
+		case 0xE:
+			break;
+		}
 		break;
 	case 9:
 		SNEVXVY((opcode >> 8) ^ 0x90, (opcode & 0xff) >> 4);
@@ -281,6 +301,26 @@ void Instructions::execute() {
 			SKNPVX((opcode >> 8) & 0xf);
 		break;
 	case 0xF:
+		switch (opcode & 0x00FF) {
+		case 0x07:
+			break;
+		case 0x0A:
+			break;
+		case 0x15:
+			break;
+		case 0x18:
+			break;
+		case 0x1E:
+			break;
+		case 0x29:
+			break;
+		case 0x33:
+			break;
+		case 0x55:
+			break;
+		case 0x65:
+			break;
+		}
 		break;
 
 	default:

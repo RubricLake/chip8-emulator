@@ -50,6 +50,7 @@ private:
 
 	void SKPVX(u8 VX);  // EX9E
 	void SKNPVX(u8 VX); // EXA1
+
 	void LDVXDT(u8 VX); // FX07
 	void LDVXK(u8 VX);  // FX0A
 	void LDDTVX(u8 VX); // FX15
